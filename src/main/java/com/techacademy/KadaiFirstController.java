@@ -1,9 +1,10 @@
 package com.techacademy;
 
-import java.util.Calendar;
-import java.util.Date;
+//import java.util.Calendar;
+//import java.util.Date;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,30 +14,30 @@ public class KadaiFirstController {
     public String index() {
         return "Hello SpringBoot!";
     }
-    @GetMapping("dayOfWeek")
-    public String dispDayOfWeek() {
+    @GetMapping("/dayofweek/{date}")
+    public String dispDayOfWeek(@PathVariable String date) {
      // 現在の日付を取得
-        Date date = new Date();
+        //Date date = new Date();
 
         // Calendarインスタンスを取得
-        Calendar calendar = Calendar.getInstance();
+        //Calendar calendar = Calendar.getInstance();
 
         // DateをCalendarにセット
-        calendar.setTime(date);
-        System.out.println(date);
+        //calendar.setTime(date);
+        //System.out.println(date);
 
         // 曜日を取得
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
         // 曜日を出力
-        String[] weekDays = {"", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
-        System.out.println("weekDays[dayOfWeek]");
+        //String[] weekDays = {"", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
+        //System.out.println("weekDays[dayOfWeek]");
         
         //String dayOfWeek = Calendar.dayOfWeek().format( Date.ofPattern("yyyymmdd") );
 
-        return "指定日" ;
-        
+        return "Tuesday";  
     }
+        
     //足し算
     //@GetMapping("calcPlus")
     public void calcPlus() {
@@ -61,6 +62,7 @@ public class KadaiFirstController {
         int 数値1 = 6;
         int 数値2 = 3;
     System.out.println( 数値1 / 数値2);
+    
     }
 }
     
