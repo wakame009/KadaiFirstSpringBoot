@@ -1,111 +1,61 @@
 package com.techacademy;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@SpringBootApplication
 public class KadaiFirstController {
+
+    public static void main(String[] args) {
+        SpringApplication.run(KadaiFirstController.class, args);
+    }
+
+    @GetMapping("/dayofweek/{date}")
+    public String getDayOfWeek(@PathVariable @DateTimeFormat(pattern = "yyyyMMdd") Date date) {
+        return calculateDayOfWeek(date);
+    }
+
+    private String calculateDayOfWeek(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.JAPAN);
+    }
     
-    @GetMapping("/")
-    public String index() {
-        return "Hello SpringBoot!";
+    @GetMapping("/plus/{val1}/{val2}")
+    public String calcPlus(@PathVariable int val1, @PathVariable int val2) {
+        int res = 0;
+        res = val1 + val2;
+        return "計算結果：" + res;
     }
-    @GetMapping("now")
-    public static void main(String args[]) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String usrDate = br.readLine(); // ユーザ入力日付
-        br.close(); // リーダを閉じる
-
-        Calendar cal = Calendar.getInstance(); // 現在日時
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyymmdd"); 
-        Date date = sdf.parse(usrDate); // ユーザ入力日付解析
-        cal.setTime(date); // ユーザが入力した日付に更新
-
-        int weekNum = cal.get(java.util.Calendar.DAY_OF_WEEK); // 曜日
-        switch(weekNum) {
-        case(Calendar.SUNDAY) : 
-        case(Calendar.MONDAY) : 
-        case(Calendar.TUESDAY) : 
-        case(Calendar.WEDNESDAY) : 
-        case(Calendar.THURSDAY) : 
-        case(Calendar.FRIDAY) : 
-        case(Calendar.SATURDAY) : 
-        }
-
-        sdf.applyPattern("yyyymmdd"); // フォーマッタのパターンを変更
-        }
-
-        static void dispDayOfWeek(String dateStr,String dayOfWeek) {
-        String now = null;
-        System.out.println( dayOfWeek + now);
-        
-        
-        //public String dispDayOfWeek() {
-        //String now = Calendar.now().format( Date.ofPattern("yyyymmdd") );
-        //return "実行結果：" + now;
-        
-        //public String dispDayOfWeek(@PathVariable String date) {
-        // 現在の日付を取得
-        //Date date = new Date();
-
-        // Calendarインスタンスを取得
-        //Calendar calendar = Calendar.getInstance();
-
-        // DateをCalendarにセット
-        //calendar.setTime(date);
-        //System.out.println(date);
-
-        // 曜日を取得
-        //int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-        // 曜日を出力
-        //String[] weekDays = {"", "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
-        //System.out.println("weekDays[dayOfWeek]");
-        
-        //String dayOfWeek = Calendar.dayOfWeek().format( Date.ofPattern("yyyymmdd") );
-
-        //return "Tuesday";  
-    }
-        
-    private Object Calendar(String string) {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
-    }
-    private Object Date() {
-        // TODO 自動生成されたメソッド・スタブ
-        return null;
-    }
-    //足し算
-    //@GetMapping("calcPlus")
-    public void calcPlus() {
-            int 数値1 = 6;
-            int 数値2 = 3;
-            System.out.println( 数値1 + 数値2);
-    }
-    //引き算
-    public void calcMinus() {
-            int 数値1 = 6;
-            int 数値2 = 3;
-        System.out.println( 数値1 - 数値2);
-    }
-    //掛け算
-    public void calcTimes() {
-        int 数値1 = 6;
-        int 数値2 = 3;
-    System.out.println( 数値1 * 数値2);
-    }
-  //割り算
-    public void calcDivide() {
-        int 数値1 = 6;
-        int 数値2 = 3;
-    System.out.println( 数値1 / 数値2);
     
+    @GetMapping("/minus/{val1}/{val2}")
+    public String calcMinus(@PathVariable int val1, @PathVariable int val2) {
+        int res = 0;
+        res = val1 - val2;
+        return "計算結果：" + res;
+    }
+    
+    @GetMapping("/times/{val1}/{val2}")
+    public String calcTimes(@PathVariable int val1, @PathVariable int val2) {
+        int res = 0;
+        res = val1 * val2;
+        return "計算結果：" + res;
+    }
+    
+    @GetMapping("/devide/{val1}/{val2}")
+    public String calcDeveide(@PathVariable int val1, @PathVariable int val2) {
+        int res = 0;
+        res = val1 / val2;
+        return "計算結果：" + res;
     }
 }
-    
