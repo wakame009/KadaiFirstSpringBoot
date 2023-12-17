@@ -28,7 +28,7 @@ public class KadaiFirstController {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
-        return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.JAPAN);
+        return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.US);
     }
     
     @GetMapping("/plus/{val1}/{val2}")
@@ -53,7 +53,7 @@ public class KadaiFirstController {
     }
     
     @GetMapping("/devide/{val1}/{val2}")
-    public String calcDeveide(@PathVariable int val1, @PathVariable int val2) {
+    public String calcDivide(@PathVariable int val1, @PathVariable int val2) {
         int res = 0;
         res = val1 / val2;
         return "計算結果：" + res;
